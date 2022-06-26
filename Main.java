@@ -1,6 +1,8 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import java.awt.event.*;
 
@@ -8,10 +10,12 @@ import src.views.FloatingView.FloatingTextField;
 import src.views.FloatingView.FloatingView;
 import src.views.VoteView.VoteTextField;
 import src.views.VoteView.VoteView;
-import src.repository.PartyRepository.Party;
-import src.repository.PartyRepository.PartyRepository;
-import src.repository.VoteRepository.VoteRepository;
+import src.repositories.PartyRepository.Party;
+import src.repositories.PartyRepository.PartyRepository;
+import src.repositories.VoteRepository.Vote;
+import src.repositories.VoteRepository.VoteRepository;
 import src.views.ButtonView;
+import src.views.CopyrightView;
 
 class Main {
   public static void main(String[] args) {
@@ -23,14 +27,14 @@ class Main {
     JPanel panel = new JPanel();
 
     PartyRepository partyRepository = new PartyRepository();
-    VoteRepository voteRepository = new VoteRepository();
+    VoteRepository voteRepository = new VoteRepository(partyRepository);
 
     ButtonView buttonView = new ButtonView(FRAME_WIDTH, FRAME_HEIGHT);
     VoteView voteView = new VoteView(FRAME_WIDTH, FRAME_HEIGHT);
     // TODO: control vote office phases
-    voteView.setVoteOffice("Vereador");
-
+    voteView.setVoteOffice("Melhor jogo");
     FloatingView floatingView = new FloatingView(FRAME_WIDTH, FRAME_HEIGHT);
+    CopyrightView copyrightView = new CopyrightView(FRAME_WIDTH, FRAME_HEIGHT);
 
     for (JButton component : buttonView.getComponents()) {
       String text = component.getText();
@@ -99,8 +103,6 @@ class Main {
               if (partyVote == "branco") {
                 voteView.restoreVoteTextFields();
               }
-
-              System.out.println("Votos: " + partyVote + " - " + voteRepository.getVotesCounterByPartyNumber(partyVote));
             }
           });
           break;
@@ -112,6 +114,39 @@ class Main {
               voteView.cleanVotes();
               floatingView.cleanView();
               floatingView.buildBlankVoteView();
+            }
+          });
+          break;
+        case "Opções":
+          component.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              String initialHtml = "<html><h3>Candidatos: </h3><ul>";
+              for (Party party : partyRepository.getParties()) {
+                initialHtml += "<li>" + party.getNumber() + " - " + party.getInitials() + " - " + party.getName() + "</li>";
+              }
+              String endHtml = "</ul></html>";
+              String htmlText = initialHtml + endHtml;
+              JOptionPane.showMessageDialog(panel, htmlText, "Opções", JOptionPane.PLAIN_MESSAGE);
+            }
+          });
+          break;
+        case "Contagem":
+          component.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              String initialHtml = "<html><h3>Resultado: </h3><ol>";
+              for (Vote vote : voteRepository.getSortedVotes()) {
+                Party partyFound = partyRepository.findPartyByNumber(vote.getKey());
+                if (partyFound != null) {
+                  initialHtml += "<li>" + partyFound.getInitials() + " - " + vote.getCounter() + "</li>";
+                } else {
+                  initialHtml += "<li>" + vote.getKey() + " - " + vote.getCounter() + "</li>";
+                }
+              }
+              String endHtml = "</ol></html>";
+              String htmlText = initialHtml + endHtml;
+              JOptionPane.showMessageDialog(panel, htmlText, "Contagem", JOptionPane.PLAIN_MESSAGE);
             }
           });
           break;
@@ -128,6 +163,11 @@ class Main {
       panel.add(component);
     }
 
+    for (JTextField component : copyrightView.getComponents()) {
+      panel.add(component);
+    }
+
+    // TODO: with all components as ArrayList, concat all in one to add to panel
 
     panel.setLayout(null);
 

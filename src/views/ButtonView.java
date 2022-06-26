@@ -1,21 +1,34 @@
 package src.views;
 import javax.swing.JButton;
 import java.awt.*;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class ButtonView {
-  JButton num1Button;
-  JButton num2Button;
-  JButton num3Button;
-  JButton num4Button;
-  JButton num5Button;
-  JButton num6Button;
-  JButton num7Button;
-  JButton num8Button;
-  JButton num9Button;
-  JButton num0Button;
-  JButton confirmButton;
-  JButton correctButton;
-  JButton blankButton;
+
+  public enum buttonTypes {
+    num0,
+    num1,
+    num2,
+    num3,
+    num4,
+    num5,
+    num6,
+    num7,
+    num8,
+    num9,
+    confirm,
+    correct,
+    blank,
+    score,
+    options
+  }
+
+  public HashMap<buttonTypes, JButton> components = new HashMap<buttonTypes, JButton>();
+
+  public Collection<JButton> getComponents() {
+    return this.components.values();
+  }
 
   public ButtonView(Integer FRAME_WIDTH, Integer FRAME_HEIGHT) {
     // voting buttons
@@ -35,72 +48,82 @@ public class ButtonView {
 
     Integer num3PosX = numButtonInitialPosX;
     Integer num3PosY = firstLineButtonPosY;
-    this.num3Button = new JButton("3");
-    this.num3Button.setFont(numButtonFont);
-    this.num3Button.setBounds(num3PosX, num3PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num3Button = new JButton("3");
+    num3Button.setFont(numButtonFont);
+    num3Button.setBounds(num3PosX, num3PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num3, num3Button);
 
     Integer num2PosX = numButtonMiddlePosX;
     Integer num2PosY = firstLineButtonPosY;
-    this.num2Button = new JButton("2");
-    this.num2Button.setFont(numButtonFont);
-    this.num2Button.setBounds(num2PosX, num2PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num2Button = new JButton("2");
+    num2Button.setFont(numButtonFont);
+    num2Button.setBounds(num2PosX, num2PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num2, num2Button);
 
     Integer num1PosX = numButtonLastPosX;
     Integer num1PosY = firstLineButtonPosY;
-    this.num1Button = new JButton("1");
-    this.num1Button.setFont(numButtonFont);
-    this.num1Button.setBounds(num1PosX, num1PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num1Button = new JButton("1");
+    num1Button.setFont(numButtonFont);
+    num1Button.setBounds(num1PosX, num1PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num1, num1Button);
 
     // second line buttons
     Integer secondLineButtonPosY = firstLineButtonPosY + numButtonDimension.height + numButtonSpaceHeight;
 
     Integer num6PosX = numButtonInitialPosX;
     Integer num6PosY = secondLineButtonPosY;
-    this.num6Button = new JButton("6");
-    this.num6Button.setFont(numButtonFont);
-    this.num6Button.setBounds(num6PosX, num6PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num6Button = new JButton("6");
+    num6Button.setFont(numButtonFont);
+    num6Button.setBounds(num6PosX, num6PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num6, num6Button);
 
     Integer num5PosX = numButtonMiddlePosX;
     Integer num5PosY = secondLineButtonPosY;
-    this.num5Button = new JButton("5");
-    this.num5Button.setFont(numButtonFont);
-    this.num5Button.setBounds(num5PosX, num5PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num5Button = new JButton("5");
+    num5Button.setFont(numButtonFont);
+    num5Button.setBounds(num5PosX, num5PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num5, num5Button);
 
     Integer num4PosX = numButtonLastPosX;
     Integer num4PosY = secondLineButtonPosY;
-    this.num4Button = new JButton("4");
-    this.num4Button.setFont(numButtonFont);
-    this.num4Button.setBounds(num4PosX, num4PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num4Button = new JButton("4");
+    num4Button.setFont(numButtonFont);
+    num4Button.setBounds(num4PosX, num4PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num4, num4Button);
 
     // third line buttons
     Integer thirdLineButtonPosY = secondLineButtonPosY + numButtonDimension.height + numButtonSpaceHeight;
 
     Integer num9PosX = numButtonInitialPosX;
     Integer num9PosY = thirdLineButtonPosY;
-    this.num9Button = new JButton("9");
-    this.num9Button.setFont(numButtonFont);
-    this.num9Button.setBounds(num9PosX, num9PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num9Button = new JButton("9");
+    num9Button.setFont(numButtonFont);
+    num9Button.setBounds(num9PosX, num9PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num9, num9Button);
 
     Integer num8PosX = numButtonMiddlePosX;
     Integer num8PosY = thirdLineButtonPosY;
-    this.num8Button = new JButton("8");
-    this.num8Button.setFont(numButtonFont);
-    this.num8Button.setBounds(num8PosX, num8PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num8Button = new JButton("8");
+    num8Button.setFont(numButtonFont);
+    num8Button.setBounds(num8PosX, num8PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num8, num8Button);
 
     Integer num7PosX = numButtonLastPosX;
     Integer num7PosY = thirdLineButtonPosY;
-    this.num7Button = new JButton("7");
-    this.num7Button.setFont(numButtonFont);
-    this.num7Button.setBounds(num7PosX, num7PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num7Button = new JButton("7");
+    num7Button.setFont(numButtonFont);
+    num7Button.setBounds(num7PosX, num7PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num7, num7Button);
 
     // fourth line buttons
     Integer fourthLineButtonPosY = thirdLineButtonPosY + numButtonDimension.height + numButtonSpaceHeight;
 
     Integer num0PosX = numButtonMiddlePosX;
     Integer num0PosY = fourthLineButtonPosY;
-    this.num0Button = new JButton("0");
-    this.num0Button.setFont(numButtonFont);
-    this.num0Button.setBounds(num0PosX, num0PosY, numButtonDimension.width, numButtonDimension.height);
+    JButton num0Button = new JButton("0");
+    num0Button.setFont(numButtonFont);
+    num0Button.setBounds(num0PosX, num0PosY, numButtonDimension.width, numButtonDimension.height);
+    this.components.put(buttonTypes.num0, num0Button);
 
     // fifth line buttons
     Integer actionButtonSpaceHeight = 40;
@@ -111,51 +134,55 @@ public class ButtonView {
     Integer fifthLineButtonPosY = fourthLineButtonPosY + actionButtonFixedHeight + actionButtonSpaceHeight;
     
     // confirm button
-    this.confirmButton = new JButton("Confirmar");
-    this.confirmButton.setFont(actionButtonFont);
-    Integer confirmButtonWidth = this.confirmButton.getPreferredSize().width;
+    JButton confirmButton = new JButton("Confirmar");
+    confirmButton.setFont(actionButtonFont);
+    Integer confirmButtonWidth = confirmButton.getPreferredSize().width;
+    
+    Integer actionButtonInitialPosX = FRAME_WIDTH - 46;
 
-    Integer actionButtonInitialPosX = FRAME_WIDTH - confirmButtonWidth - 46;
-
-    Integer confirmPosX = actionButtonInitialPosX;
+    Integer confirmPosX = actionButtonInitialPosX - confirmButtonWidth;
     Integer confirmPosY = fifthLineButtonPosY;
-    this.confirmButton.setBounds(confirmPosX, confirmPosY, confirmButtonWidth, actionButtonFixedHeight);
-
+    confirmButton.setBounds(confirmPosX, confirmPosY, confirmButtonWidth, actionButtonFixedHeight);
+    this.components.put(buttonTypes.confirm, confirmButton);
+    
     // correct button
-    this.correctButton = new JButton("Corrige");
-    this.correctButton.setFont(actionButtonFont);
-    Integer correctButtonWidth = this.correctButton.getPreferredSize().width;
-
+    JButton correctButton = new JButton("Corrige");
+    correctButton.setFont(actionButtonFont);
+    Integer correctButtonWidth = correctButton.getPreferredSize().width;
     Integer correctPosX = confirmPosX - actionButtonSpaceBetween - correctButtonWidth;
     Integer correctPosY = fifthLineButtonPosY;
-    this.correctButton.setBounds(correctPosX, correctPosY, correctButtonWidth, actionButtonFixedHeight);
+    correctButton.setBounds(correctPosX, correctPosY, correctButtonWidth, actionButtonFixedHeight);
+    this.components.put(buttonTypes.correct, correctButton);
 
     // blank button
-    this.blankButton = new JButton("Branco");
-    this.blankButton.setFont(actionButtonFont);
-    Integer blankButtonWidth = this.blankButton.getPreferredSize().width;
-
+    JButton blankButton = new JButton("Branco");
+    blankButton.setFont(actionButtonFont);
+    Integer blankButtonWidth = blankButton.getPreferredSize().width;
     Integer blankPosX = correctPosX - actionButtonSpaceBetween - blankButtonWidth;
     Integer blankPosY = fifthLineButtonPosY;
-    this.blankButton.setBounds(blankPosX, blankPosY, blankButtonWidth, actionButtonFixedHeight);
-  }
+    blankButton.setBounds(blankPosX, blankPosY, blankButtonWidth, actionButtonFixedHeight);
+    this.components.put(buttonTypes.blank, blankButton);
 
-  public JButton[] getComponents() {
-    JButton[] components = {
-      this.num1Button,
-      this.num2Button,
-      this.num3Button,
-      this.num4Button,
-      this.num5Button,
-      this.num6Button,
-      this.num7Button,
-      this.num8Button,
-      this.num9Button,
-      this.num0Button,
-      this.confirmButton,
-      this.correctButton,
-      this.blankButton  
-    };
-    return components;
+    // sixth line buttons
+
+    Integer sixLineButtonPosY = fifthLineButtonPosY + actionButtonFixedHeight + actionButtonSpaceHeight;
+    
+    // score
+    JButton scoreButton = new JButton("Contagem");
+    scoreButton.setFont(actionButtonFont);
+    Integer scoreButtonWidth = scoreButton.getPreferredSize().width;
+    Integer scorePosX = actionButtonInitialPosX - scoreButtonWidth;
+    Integer scorePosY = sixLineButtonPosY;
+    scoreButton.setBounds(scorePosX, scorePosY, scoreButtonWidth, actionButtonFixedHeight);
+    this.components.put(buttonTypes.score, scoreButton);
+
+    // options
+    JButton optionsButton = new JButton("Opções");
+    optionsButton.setFont(actionButtonFont);
+    Integer optionsButtonWidth = optionsButton.getPreferredSize().width;
+    Integer optionsPosX = blankPosX;
+    Integer optionsPosY = sixLineButtonPosY;
+    optionsButton.setBounds(optionsPosX, optionsPosY, optionsButtonWidth, actionButtonFixedHeight);
+    this.components.put(buttonTypes.options, optionsButton);
   }
 }

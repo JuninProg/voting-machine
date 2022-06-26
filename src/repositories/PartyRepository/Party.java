@@ -1,4 +1,4 @@
-package src.repository.PartyRepository;
+package src.repositories.PartyRepository;
 
 public class Party {
   String name;
@@ -17,5 +17,9 @@ public class Party {
 
   public String getInitials() {
     return this.initials;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }

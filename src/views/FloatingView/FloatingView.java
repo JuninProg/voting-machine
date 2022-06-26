@@ -1,9 +1,10 @@
 package src.views.FloatingView;
 
+import src.repositories.PartyRepository.Party;
+
 import java.awt.*;
 import java.util.ArrayList;
 
-import src.repository.PartyRepository.Party;
 
 public class FloatingView {
   ArrayList<FloatingTextField> components = new ArrayList<FloatingTextField>();
@@ -98,7 +99,7 @@ public class FloatingView {
     nullVoteTextField.setVisible(false);
 
     FloatingTextField partyOfficeTextField = this.getComponentsByType(floatingTypes.parttyOffice).get(0);
-    partyOfficeTextField.setText("Partido:   " + party.getInitials());
+    partyOfficeTextField.setText("Jogo: " + party.getInitials() + " - " + party.getName());
     Point partyOfficeTextFieldLocation = partyOfficeTextField.getLocation();
     Dimension partyOfficeTextFieldSize =  partyOfficeTextField.getPreferredSize();
     partyOfficeTextField.setBounds(partyOfficeTextFieldLocation.x, partyOfficeTextFieldLocation.y, partyOfficeTextFieldSize.width, partyOfficeTextFieldSize.height);
